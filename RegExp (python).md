@@ -7,21 +7,13 @@ Regular Expressions cheat-sheet (Python)
 SEARCH FUNCTIONS/METHODS
 ------------------------
 
-##### search()
-`re.search(pattner, string[, flags]) -> MatchObject`  
->Searches for that pattern **within** the string. If the search is successful, it returns a match object; otherwise ir returns `None`.  `match.group()` is the matching text
+`re.search(pattner, string[, flags]) ` : searches *anywhere* the string.
 
-##### match()
-` re.match(pattern, string[, flags]) -> MatchObject`  
->Checks for a match only at the **beginning** of the string, while `re.search` checks for a match anywhere in the string
+` re.match(pattern, string[, flags]) -> MatchObject` : searches at the *beginning* of the string.
 
-##### findall()
- `re.findall(pattern, string[, flags]) -> list of strings`  
->Finds *all* the matches and returns them as a list of strings, with each string representing one match
+ `re.findall(pattern, string[, flags]) -> list of strings` : returns all matches as a list of strings
  
-##### sub()
-`re.sub(pattern, repl, string[, count, flags]) -> string`  
->Searches for all the instances of pattern in the given string, and replaces them.
+`re.sub(pattern, repl, string[, count, flags])` : replace instances by repl
 
 ##### split()
 `re.split(pattern, string[, maxsplit, flags]) -> list of strings`
