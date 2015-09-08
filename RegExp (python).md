@@ -1,10 +1,11 @@
 
-# Regular Expressions cheat-sheet (Python)
+Regular Expressions cheat-sheet (Python)
+========================================
 
----
 
 
-### SEARCH FUNCTIONS/METHODS
+SEARCH FUNCTIONS/METHODS
+------------------------
 
 ##### search()
 `re.search(pattner, string[, flags]) -> MatchObject`  
@@ -37,7 +38,8 @@
 ---
 
 
-## MANIPULATION METHODS
+MANIPULATION METHODS
+--------------------
 
 ##### split()
 `re.split()`
@@ -50,7 +52,8 @@
 ---
 
 
-## VARIOUS
+VARIOUS
+-------
 - The 'r' at the start of the pattern string designates a python "raw" string which passes through backslashes without change which is very handy for regular expressions  
 - Ignore capital characters : **re.I**,  **re.IGNORECASE**  
 
@@ -58,7 +61,8 @@
 ---
 
 
-## PATTERNS  
+PATTERNS  
+--------
 Except for control characters, `(+ ? . * ^ $ ( ) [ ] { } | \)`, all characters match themselves
 
 |pattern   |descr   |
@@ -97,7 +101,8 @@ a|b	Matches either a or b.
 ---
 
 
-## References
+References
+----------
 1. intro: https://developers.google.com/edu/python/regular-expressions 
 2. cheatsheet: https://github.com/tartley/python-regex-cheatsheet/blob/master/cheatsheet.rst
 3. comprehensive: http://www.tutorialspoint.com/python/python_reg_expressions.htm
