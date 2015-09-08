@@ -4,8 +4,7 @@ REGULAR EXPRESSIONS cheet sheet (Python)
 
 
 Search
-------------------------
-
+------
 These functions return a matchobject, or None if not sucessful  
 
 `re.search(pattner, string[, flags]) ` : searches *anywhere* the string.  
@@ -14,18 +13,15 @@ These functions return a matchobject, or None if not sucessful
 `re.split(pattern, string[, maxsplit, flags])` : returns list of strings  
 
 To view the results:  
+
 `matchobject.group()`   : returns is the matching text. .group(0) is the entire match. .group(1) si the first parenthesized subgroup. Multiple arguments such as .group(1, 2) give us a tuple.  
 
 
----
-
 Manipulation
---------------------
+------------
 `re.sub(pattern, repl, string[, count, flags])` : replace instances by repl.  
 `re.split()` : split string by the occurrences of pattern. If capturing parentheses are used in pattern, then the text of all groups in the pattern are also returned as part of the resulting list.  
 `re.sub(pattern, repl, string,  count=0, flags=0)` : return the string obtained by replacing the leftmost non-overlapping occurrences of pattern in string. `count` is the maximum number of pattern occurrences to be replaced.  
-
----
 
 
 Various
@@ -34,10 +30,8 @@ Various
 - Ignore capital characters : `**re.I**,  re.IGNORECASE  `.  
 - The 'r' at the start of the pattern string designates a python "raw" string which passes through backslashes without change which is very handy for regular expressions.  
 
----
 
-
-PATTERNS  
+Patterns  
 --------
 Except for control characters, `(+ ? . * ^ $ ( ) [ ] { } | \)`, all characters match themselves.  
 
@@ -72,9 +66,6 @@ a|b	Matches either a or b.
 `\w (\W)`
  - \w matches alphanimeric characters [0-9a-zA-Z_]  
  - \W is the opposite (non-alphanumeric)
-
-
----
 
 
 References
