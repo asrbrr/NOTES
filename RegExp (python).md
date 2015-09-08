@@ -1,5 +1,5 @@
 
-REGULAR EXPRESSIONS cheat sheet (Pyhton)
+REGULAR EXPRESSIONS cheat sheet (Python)
 ========================================
 
 
