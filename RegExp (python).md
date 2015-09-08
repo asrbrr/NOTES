@@ -1,54 +1,38 @@
 
-Regular Expressions cheat-sheet (Python)
+REGULAR EXPRESSIONS cheat sheet (Pyhton)
 ========================================
 
 
-
-SEARCH FUNCTIONS/METHODS
+Search
 ------------------------
 
+These functions return a matchobject, or None if not sucessful
+
 `re.search(pattner, string[, flags]) ` : searches *anywhere* the string.
+`re.match(pattern, string[, flags])`  : searches at the *beginning* of the string.
+`re.findall(pattern, string[, flags])` : returns all matches as a list of strings
+`re.split(pattern, string[, maxsplit, flags])` : returns list of strings
 
-` re.match(pattern, string[, flags]) -> MatchObject` : searches at the *beginning* of the string.
+To view the results:
+`matchobject.group()`   : returns is the matching text. .group(0) is the entire match. .group(1) si the first parenthesized subgroup. Multiple arguments such as .group(1, 2) give us a tuple.
 
- `re.findall(pattern, string[, flags]) -> list of strings` : returns all matches as a list of strings
- 
-`re.sub(pattern, repl, string[, count, flags])` : replace instances by repl
-
-##### split()
-`re.split(pattern, string[, maxsplit, flags]) -> list of strings`
->Returns list of strings
-
-#### group()
-`matchobject.group()`  
->Returns is the matching text. .group(0) is the entire match. .group(1) si the first parenthesized subgroup. .group(1, 2), multiple arguments give us a tuple.
-
-##### compile()
-`re.compile(pattern[, flags]) -> RegexObject  `
->Compile a regular expression pattern into a regular expression object, which can be used for matching using its `match()` and `search()` methods
 
 ---
 
-
-MANIPULATION METHODS
+Manipulation
 --------------------
-
-##### split()
-`re.split()`
->Split string by the occurrences of pattern. If capturing parentheses are used in pattern, then the text of all groups in the pattern are also returned as part of the resulting list
-
-##### re.sub()
-`re.sub(pattern, repl, string,  count=0, flags=0)`
->Return the string obtained by replacing the leftmost non-overlapping occurrences of pattern in string. `count` is the maximum number of pattern occurrences to be replaced
+`re.sub(pattern, repl, string[, count, flags])` : replace instances by repl
+`re.split()` : split string by the occurrences of pattern. If capturing parentheses are used in pattern, then the text of all groups in the pattern are also returned as part of the resulting list
+`re.sub(pattern, repl, string,  count=0, flags=0)` : return the string obtained by replacing the leftmost non-overlapping occurrences of pattern in string. `count` is the maximum number of pattern occurrences to be replaced
 
 ---
 
 
-VARIOUS
+Various
 -------
+- `re.compile(pattern[, flags])` : Compiles a RegExp pattern into a RegexObject , which can be used for matching using its `match()` and `search()` methods
+- Ignore capital characters : `**re.I**,  re.IGNORECASE  `
 - The 'r' at the start of the pattern string designates a python "raw" string which passes through backslashes without change which is very handy for regular expressions  
-- Ignore capital characters : **re.I**,  **re.IGNORECASE**  
-
 
 ---
 
@@ -74,20 +58,19 @@ Except for control characters, `(+ ? . * ^ $ ( ) [ ] { } | \)`, all characters m
 |(re)	|Groups regular expressions and remembers matched text.|
 a|b	Matches either a or b.
 
-#####  . (a period)
-> matches any single character except newline '\n'
+`. (a period) ` : matches any single character except newline '\n'
 
-#####  \s  (\S)
-> \s matches whitespace [ \t\n\r\f\v]  
-> \S is the opposeite (matches non-whitespace)
+`\s  (\S) ` : 
+ -  \s matches whitespace [ \t\n\r\f\v]  
+ -  \S is the opposeite (matches non-whitespace)
 
-##### \d    (\D)
-> `\d` matches digits. Equivalent to [0-9].  
-> `\D` is the opposite (matches nondigits).
+`\d    (\D)`
+ - > `\d` matches digits. Equivalent to [0-9].  
+ - > `\D` is the opposite (matches nondigits).
 
-#####  \w (\W)
-> \w matches alphanimeric characters [0-9a-zA-Z_]  
-> \W is the opposite (non-alphanumeric)
+`\w (\W)`
+ - \w matches alphanimeric characters [0-9a-zA-Z_]  
+ - \W is the opposite (non-alphanumeric)
 
 
 ---
