@@ -1,5 +1,6 @@
-# MARKDOWN CHEAT-SHEET
 
+MARKDOWN CHEAT-SHEET
+====================
 
 | Markdown syntax     |  |
 |:---|:---|
@@ -41,6 +42,8 @@ Tables:
 ```
 
 ---
-## References
+
+References
+----------
  - https://help.github.com/articles/markdown-basics/
 
