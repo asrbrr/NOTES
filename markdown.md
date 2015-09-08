@@ -1,5 +1,5 @@
 
-MARKDOWN CHEAT-SHEET
+MARKDOWN cheat sheet
 ====================
 
 | Markdown syntax     |  |
