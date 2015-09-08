@@ -1,6 +1,6 @@
 # MARKDOWN CHEAT-SHEET
 
-### IPYTHON MARKDOWN
+### MARKDOWN
 
 | Markdown syntax     |  |
 |:---|:---|
@@ -41,5 +41,7 @@ Tables:
 | row1 | ok |
 ```
 
-
+---
+## References
+ - https://help.github.com/articles/markdown-basics/
 
