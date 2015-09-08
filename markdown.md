@@ -9,7 +9,7 @@ MARKDOWN cheat sheet
 | `**bold**` / `__bold__` | **BOLD**|
 | `~~striped~~` | ~~STRIPED~~|
 | ` `monospace`  ` (triple backticks for blocks)|`MONOSPACE` |
-|`LaTeX: $ e^{i \pi} = -1 $` (`$$` for block)| $e^{i \pi} = -1$|
+|`LaTeX (ipython notebook): $ e^{i \pi} = -1 $` (`$$` for block)| $e^{i \pi} = -1$|
 |`[link](http://www "tips")`|[link](http://example.com "tips")|
 |`! [alt_text](http:...) "popup"` |![alternative text if image fails](http://ipython.org/_static/IPy_header.png "popup message")|
 |horizontal lines|**---** or **`***`** or **`___`**|
