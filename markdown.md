@@ -1,6 +1,5 @@
 # MARKDOWN CHEAT-SHEET
 
-### MARKDOWN
 
 | Markdown syntax     |  |
 |:---|:---|
