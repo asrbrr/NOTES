@@ -1,2 +1,2 @@
 # NOTES
-A set of cheat-sheets and convenience notes on various topics
+Cheat-sheets, snippets and draft notes on various topics (python, R, ML etc) 
