@@ -137,12 +137,23 @@ NA         #NA has a type as well (NA character, etc)
 #### Date-times
 ```r
 as.Date("1970-01-01")
+as.Date(x, "%d%b%Y"
 Sys.time()    #uses the POSIXct class, ie, seconds since 1970-01-01
 as.POSIXlt(x) #list with sec, min, hour, mday, mon, year, wkday, yday, isdst
 strptime("January 10, 2014", "%B %d %Y")
 
 weekdays()
 months()
+julian()        #days since origin, 1970-01-01
+
+date()          #returns current date/time as string
+Sys.Date()      #returns date (only) as Date class
+
+library(lubridate)
+ymd("20140108")
+mdy()
+dmy()
+ymd_hms()
 ```
 
 ## Data Structures
@@ -372,10 +383,49 @@ summarize(group_by(df, var), colA=mean(colA))
 
 ```
 
+## String manipulation
+
+```r
+tolower() , toupper()
+strsplit(names, "\\.")      #. is a reserverd character.
+sub("_","",names)           #replace first
+gsub("_","",names)          #replace allç
+grep("text", data)          #returns element numbers where "test"apperas
+grep("text", data, value=T) #returns elements where "test"apperas
+grepl("text", data)         #boolean vector where "text" appers
+
+libarary(stringr)
+substr("str", 0,2)          #substring
+paste("a","b")              #paste together, default separation is space
+str_trim("text  ")          #remove end spcaes 
+```
+
+Regular expressions
+```r
+^str              #beggining of line
+str$              #end of line
+[Bb][Uu][Ss][Hh]  #matches bush, Bush, busH etc    
+[0-9][a-zA-Z]     #range of characters
+[^str]            #matches any character NOT in the indicated class
+.                 #any single character
+str|str           #combines alternatives with OR
+()                #group
+()?               #the expression is optional
++                 #repeat any muber of times but at least one
+*                 #repeat any number of times (including 0). It's greedy (max chars it can)
+*?                #not greedy: min number of chars possible that match
+{}                #qualifiers; specify min and max number of times the expression matches
+\1 \2             #to refer to the matched text before
+
+``` 
+
+
+
+
 ## Reading /Writing data  
 
 ```r
-read.table()          #parameters: file, header, sep, row.names, nrows
+read.table()           #parameters: file, header, sep, row.names, nrows
 read.csv()
 read.csv2()
 readLines              #lines of a text file
