@@ -40,6 +40,7 @@ This is in relation to the R programming language, so you need:
 
  - RStudio
  - [devtools](https://github.com/hadley/devtools)
+ - Read H.Wickham's excellent [R packages](http://r-pkgs.had.co.nz/) book
 
 
 # Workflow
