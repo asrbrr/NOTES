@@ -3,35 +3,36 @@
 # R analysis workflow
 
 
-## Motivation
+## MOTIVATION
 
 Having standarized ways of doing things is a good idea:  
  
  - it helps you while doing things because it removes friction
  - it helps others understand your work
- - it can be made to offer the 'toolkit' or the 'batteries-included' approach
+ - it can be made to offer a 'batteries-included' approach
  - it is cool
  - it inspires others
  
  
- Many of the things that I do are a one-off kind of thing. You
- woldn't want to build a proper package for it because it is not 
- aimed at being reused elsewhere. Instead, there is a problem
- or question, there is some input, and hopefully there is some
- output or conclusions and that's it.
+Many of the things that we do are a one-off kind of analysis. You
+woldn't want to build a proper package for it because it is not 
+aimed at being reused elsewhere. Instead, there is a problem/question, 
+there is some input, and hopefully in the end you arrive at some
+output/conclusions. And that's it.
  
- Simple R scripts (plus R projects) are convenient for this: 
- you access the project, you source the scripts, you call 
- the functions, you write some conclusions somewhere
- and you are more or less done. However it is all too tempting to leave
- them barebone and skip other parts that *will* help you
- or others in the future (such as documentation, tests, use cases etc),
- or that can help reuse some parts of the code.
+Simple R scripts (plus R projects) are convenient for this: 
+you access the project, you source the scripts, you call 
+the functions, you write some conclusions somewhere
+and you are more or less done. However it is all too tempting to leave
+them barebone and skip other parts that *will* help you
+or others in the future (such as documentation, tests, use cases etc),
+or that can help reuse some parts of the code.
  
-After reading various recommendations in the interet, I believe the optimum
+Based on experience, I have ended up believing the best
 is to follow as closely as possible the R packages structure, while using
-the contents as scripts. The key feature here is `devtools::load_all()`,
-and this changes your life :-)
+the contents as scripts. You get the freedom of simple scripts
+with the power of the project structure: the best of both worlds (sort of).
+The key feature here is `devtools::load_all()`.
 
 
 ## Requirements
@@ -43,15 +44,16 @@ This is in relation to the R programming language, so you need:
  - Read H.Wickham's excellent [R packages](http://r-pkgs.had.co.nz/) book
 
 
-## Workflow
+## WORKFLOW
 
-### 0 Think
+### 1. Think
 
-#### 0.1 Choose a name
+This is the hardest part in truth...
 
-This is well known to be amongst the most difficult steps in the process...
+#### 1.1 Choose a (good) name
 
-#### 0.2 Think the approach
+
+#### 1.2 Devise the overall approach
 
 What is the true questions, what are the challenges, 
 what are the options, what structure to attempt, 
@@ -59,30 +61,43 @@ what tools to use, what is the concrete use case,
 who are the users, will it need productionizing or not,
 etc
 
-This is the step that eventually (after many days of work) you
+This is the step that eventually (after many hours of work) you
 are likely to end up thing *"if only I had thought of this at the
 beggining..."*
 
-#### 0.3 Draft some diagrams on paper/board
+#### 1.3 Draft some diagrams on paper/board
 
 Paper is underrated these days...
 
-#### 0.4 Explore available datasets, explore potential tools
+#### 1.4 Explore available datasets, explore potential tools, ask
 
 But keep it as simple as possible. It is all too tempting
 to try out the new shiny & trendy package, but this
 might as well be an overkill or simply a bad decision 
 because of the hidden burden it introduces in learning it, 
-mastering it, mantaining it, comminicating it to colleagues etc
+mastering it, mantaining it, comminicating it to colleagues etc.
+Hear the [Not So Standard Deviations](http://nssdeviations)
+podcast for good advise on this.
 
-#### 0.5 Iterate
+#### 1.5 Iterate
 
 Go back to point 0.2 and iterate this loop until
 you start to *see* things with some clarity...
 
-### 1. Create Rstudio project of type package
 
-### 2. Create files containing functions under R/
+
+
+### 2. Create contents
+
+
+#### 2.1 Create Rstudio project (of type package)
+
+#### 2.2 Fill in the DESCRIPTION file
+
+See [here](http://r-pkgs.had.co.nz/description.html) about it.
+
+
+#### 2.3 Create files containing functions under R/
 
 As usual, the file names should be ideally concise and self
 describing and intuitive and all, and the same goes for the
@@ -99,12 +114,37 @@ I tend to have few files and quite some functions in each of them. This is
 probably *not* the most widely recommended approach. However I feel very confortable
 with this, because RStudio has the nice 'Document outline' tool that gives
 you a great index view of the functions (and sections) it each file. Relatedly,
-you should very frequently use the F2 search option for functions.
+you should very frequently use the F2 and Ctr+. search options for functions.
 
 
-### 3. Write functions 
+#### 2.4 Write functions 
 
-#### 3.1 Use Roxygen2 documentation
+You may find convenient to use the following RStudio snippet. Jut type "fun" and 
+the this placeholder will be written for you.
+
+```r
+snippet fun
+	#' Title
+	#'
+	#' @param x
+	#'
+	#' @return
+	#'
+	#' @examples
+	#' 
+	#' @import assertthat
+	#' @export
+	#'
+	${1:name} <- function(${2:x}) {
+		${0}
+	}
+	#
+	#   file.edit("tests/testthat/test-${1:name}.R")
+	#   devtools::test(filter="${1:name}")
+```
+
+
+**Use Roxygen2 documentation**
 
 In RStudio, press Ctr+Alt+Shift+R to add the documentation
 section on top of each function.
