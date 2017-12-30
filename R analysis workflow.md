@@ -119,8 +119,12 @@ you should very frequently use the F2 and Ctr+. search options for functions.
 
 #### 2.4 Write functions 
 
-You may find convenient to use the following RStudio snippet. Jut type "fun" and 
+You may find convenient to create and use the 
+following RStudio snippet. Just type "fun" and 
 the this placeholder will be written for you.
+What I like is that you get a (seggested) test
+file related to this function right at the end for
+easy creation/edit.
 
 ```r
 snippet fun
@@ -146,50 +150,69 @@ snippet fun
 
 **Use Roxygen2 documentation**
 
-In RStudio, press Ctr+Alt+Shift+R to add the documentation
+Either use to structure created above by the snippet,
+or in RStudio, press Ctr+Alt+Shift+R to add the documentation
 section on top of each function.
 
 Always add the description, param, return, export, import and example.
+I tend to always add `@import assertthat` as a reminder
+to use assertions, which is a very good idea.
 
+**About the dependencies**
 
-#### 3.2 Dependencies and functions form other packages
-
-Do not use the `library(x)` or `require(x)` calls. 
+Do not use the `library(x)` or `require(x)` calls, as you would in scripts.
 Instead write it as you would in a 
-package (in the `DESCRIPTION` and/or `NAMESPACE` files, but making
-use of Roxygen2), as follows:  
+package in the `DESCRIPTION` file 
+(also at times in `NAMESPACE` files, but making
+use of Roxygen2, read [this](http://r-pkgs.had.co.nz/namespace.html) ), 
+as follows:  
 
- 1. When requiring functions from a package (say, dplyr), 
-    add it to the DESCRIPTION file, under the
-   **`Depends:`** section (instead of the `IMports:` section).
-   This makes sure that the packages
-   are installed when you load your analysis, and complains if not.
-   Note that this is perhaps *not* the best practice for packages (see 
-   [this](http://r-pkgs.had.co.nz/namespace.html) section
-   of R packaes book: "*Unless there is a good reason otherwise, 
-   you should always list packages in Imports not Depends*"), but 
-   remember that we are not trying to 
-   build a real package but an analysis. The effect
-   that this has is that the packages listed there are loaded 
-   *and* attached when your code is 'attached', so they are the facto available
-   for you in intereactive use.  However, note also that if you were to
-   actually  build it as a true package and call
-   functions within it with the mypckg::func notation, then
-   your package is *loaded* but not *attached*, and neither are 
-   the packages under the `Depends` section, which causes the function
-   calls to these packages that are not fully qualified (with `::`) to fail.
-   
- 2. Additionally, strive to use the `package::function` notation 
- to call external functions whenever reasonable. This is to
- follow best practices, to add clarity to the code, and to try 
- to simplify the process of reusing the code elsewhere (perhaps
- builind a true package later on, or moving parts of the code of
- your analysis to an actual package).
- 
- 3. For extra clarity, if you are not going to follow  `package::function`
- notation, then add the package name as a Roxygen2 `@import` tag on the function
- documentation section: for example, `@import assertthat`. (Or if
- you are more picky, for example `@importFrom assertthat assert_that`)
+When requiring functions from a package (say, dplyr):
+ 1. Add it to the DESCRIPTION file under **`Depends:`**.
+    It is a good idea to add version numbers (like `dplyr (>= 0.7)`).
+    It is also a good idea to use `package::func` notation.
+ 2. Or add it to the DESCRIPTION file under `Imports`
+    and always use `package::func` notation.
+ 3. Or add it to the DESCRIPTION file under `Imports`
+    and also add it as a `@Import package` tag 
+    (or more selectively, `@ImportFrom package fun`) in 
+    the Roxygen header of the function.
+
+The recommended way for packages in general is 2 
+(see [this](http://r-pkgs.had.co.nz/namespace.html)),
+but because this is in truth an analysis and not a full-featured
+package, i simply use option 1. 
+The rationel behing the options is this:
+ *	Having dependencies explicit in a signle place 
+ 	(the DESCRIPTION file), with
+ 	version numbers, is great message for others.
+ * 	The **`Depends:`** section (within the DESCRIPTION file) 
+ 	makes sure the packages are installed, and *attaches* them.
+ 	This allows you to skip the `package::fun` notation *in principle*.
+	Besides, this is very convenient when coding/debugging, because
+	at times you end up typing things in the console, and 
+	`Depends` makes them facto available
+	for you in intereactive use. As opposed
+	to this, the **`Imports`** section does *not* attach the packages.
+ * 	Remember however that if you end up building an actual
+	package, not using the `package::fun` notation is bad, it 
+	can make things not work. This is
+	because `package::fun` would only load you package
+	instead of attaching it.
+	For packages, "*unless there is a good reason otherwise, 
+	you should always list packages in Imports not Depends*" 
+	[H.Wickham](http://r-pkgs.had.co.nz/namespace.html). 
+ *	The `package::func` notation is a good idea in general,
+ 	regardless of the use of `Depends`/`Imports`,
+ 	because it adds clarity. However some packages are
+	becoming lingua franca (like dplyr, ggplot2 etc) and
+	doesnt make much sense to always fully quality them.
+	That is why I thing `Depends` is good enough.
+	For extra clarity, when opting to skip the `::`
+	notation, ideally we would add the package or 
+	function to our NAMESPACE with the `@import` tag.
+
+
 
 
 
