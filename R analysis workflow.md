@@ -29,18 +29,25 @@ or others in the future (such as documentation, tests, use cases etc),
 or that can help reuse some parts of the code.
  
 Based on experience, I have ended up believing the best
-is to follow as closely as possible the R packages structure, while using
-the contents as scripts. You get the freedom of simple scripts
+is to follow as closely as possible the R packages structure,
+even if the package is not meant to be distributed and used
+as a proper package. What you get is the freedom of simple scripts,
 with the power of the project structure: the best of both worlds (sort of).
-The key feature here is `devtools::load_all()`.
+
+Some key feature are:
+ - motivates you to building atomic single-purpose functions
+ - motivates you to documenting stuff (dependencies, Roxygen, etc)
+ - motivates you to creating unit tests
+ - very agile with `devtools::load_all()` (Ctr+Shft+L) 
+   and `devtools::test()` (Ctr+Shft+T)
 
 
-## Requirements
+## REQUIREMENTS
 
 This is in relation to the R programming language, so you need:
 
- - RStudio
- - [devtools](https://github.com/hadley/devtools)
+ - [devtools](https://github.com/hadley/devtools) (`install.packages("devtools")`)
+ - RStudio IDE
  - Read H.Wickham's excellent [R packages](http://r-pkgs.had.co.nz/) book
 
 
@@ -50,7 +57,10 @@ This is in relation to the R programming language, so you need:
 
 This is the hardest part in truth...
 
+
 #### 1.1 Choose a (good) name
+
+Changing project names later on is possible but anoying...
 
 
 #### 1.2 Devise the overall approach
@@ -65,9 +75,11 @@ This is the step that eventually (after many hours of work) you
 are likely to end up thing *"if only I had thought of this at the
 beggining..."*
 
+
 #### 1.3 Draft some diagrams on paper/board
 
 Paper is underrated these days...
+
 
 #### 1.4 Explore available datasets, explore potential tools, ask
 
@@ -79,22 +91,42 @@ mastering it, mantaining it, comminicating it to colleagues etc.
 Hear the [Not So Standard Deviations](http://nssdeviations)
 podcast for good advise on this.
 
+
 #### 1.5 Iterate
 
 Go back to point 0.2 and iterate this loop until
 you start to *see* things with some clarity...
 
 
-
-
 ### 2. Create contents
-
 
 #### 2.1 Create Rstudio project (of type package)
 
 #### 2.2 Fill in the DESCRIPTION file
 
-See [here](http://r-pkgs.had.co.nz/description.html) about it.
+Read [here](http://r-pkgs.had.co.nz/description.html) about it. Rememeber:
+ - `Package` field "*should contain only (ASCII) letters, numbers and dot, 
+   have at least two characters and start with a letter and not end in a dot.*"
+ - `Title` "*is a one line description of the package, 
+   and is often shown in package listing. It should be plain text (no markup), 
+   capitalised like a title, and NOT end in a period. Keep it short: 
+   listings will often truncate the title to 65 characters.*"
+ - `Description` "*is more detailed than the title. You can use multiple 
+   sentences but you are limited to one paragraph. If your description 
+   spans multiple lines (and it should!), each line must be no more than 80 characters wide. Indent subsequent lines with 4 spaces.*"
+ - `Authors@R` allows two kinds of syntax: 
+   `person("Name", "Surname", email = "initials@domain.com",
+   role = c("aut", "cre"))` or 
+   `"Name Surname <initials@domain.com> [aut, cre]"`
+   (with restrictions). There must be a single creator/mantainer (`cre`),
+   one or more authors (`aut`), and optionally contributors (`ctb`).
+ - `Version` is of your choosing, but when things grow in complexity
+   and if several people are involved,
+   it is a good idea to start using it sistematically, specially in sync with Git
+   tags, and "*what's new*" documentation.
+
+
+#### 2.3 Create the package documentation 
 
 
 #### 2.3 Create files containing functions under R/
@@ -119,11 +151,14 @@ you should very frequently use the F2 and Ctr+. search options for functions.
 
 #### 2.4 Write functions 
 
+I am an advocate of functions as opossed to classes in general,
+except when they make real sense. So I focus on functions here.
+
 You may find convenient to create and use the 
-following RStudio snippet. Just type "fun" and 
-the this placeholder will be written for you.
-What I like is that you get a (seggested) test
-file related to this function right at the end for
+following RStudio snippet. Just type "*fun*" and 
+this placeholder will be written for you.
+What I like is that you get a (seggested) testthat
+test-file related to this function right at the end for
 easy creation/edit.
 
 ```r
@@ -158,6 +193,7 @@ Always add the description, param, return, export, import and example.
 I tend to always add `@import assertthat` as a reminder
 to use assertions, which is a very good idea.
 
+
 **About the dependencies**
 
 Do not use the `library(x)` or `require(x)` calls, as you would in scripts.
@@ -171,9 +207,9 @@ When requiring functions from a package (say, dplyr):
  1. Add it to the DESCRIPTION file under **`Depends:`**.
     It is a good idea to add version numbers (like `dplyr (>= 0.7)`).
     It is also a good idea to use `package::func` notation.
- 2. Or add it to the DESCRIPTION file under `Imports`
+ 2. Or add it to the DESCRIPTION file under `Imports:`
     and always use `package::func` notation.
- 3. Or add it to the DESCRIPTION file under `Imports`
+ 3. Or add it to the DESCRIPTION file under `Imports:`
     and also add it as a `@Import package` tag 
     (or more selectively, `@ImportFrom package fun`) in 
     the Roxygen header of the function.
@@ -191,27 +227,30 @@ The rationel behing the options is this:
  	This allows you to skip the `package::fun` notation *in principle*.
 	Besides, this is very convenient when coding/debugging, because
 	at times you end up typing things in the console, and 
-	`Depends` makes them facto available
+	`Depends:` makes them facto available
 	for you in intereactive use. As opposed
-	to this, the **`Imports`** section does *not* attach the packages.
+	to this, the **`Imports:`** section does *not* attach the packages.
  * 	Remember however that if you end up building an actual
 	package, not using the `package::fun` notation is bad, it 
 	can make things not work. This is
 	because `package::fun` would only load you package
 	instead of attaching it.
 	For packages, "*unless there is a good reason otherwise, 
-	you should always list packages in Imports not Depends*" 
+	you should always list packages in Imports: not Depends*" 
 	[H.Wickham](http://r-pkgs.had.co.nz/namespace.html). 
  *	The `package::func` notation is a good idea in general,
- 	regardless of the use of `Depends`/`Imports`,
+ 	regardless of the use of `Depends:`/`Imports:`,
  	because it adds clarity. However some packages are
 	becoming lingua franca (like dplyr, ggplot2 etc) and
 	doesnt make much sense to always fully quality them.
-	That is why I thing `Depends` is good enough.
+	That is why I thing `Depends:` is good enough.
 	For extra clarity, when opting to skip the `::`
 	notation, ideally we would add the package or 
 	function to our NAMESPACE with the `@import` tag.
 
+**Write tests**
+
+Type `devtools::use_testthat()` to initialize
 
 
 
