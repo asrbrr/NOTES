@@ -1,7 +1,33 @@
 # SQL cheatsheet and recipies
 
-I'm using the Microsoft SQL-Server flavour
+(I'm using the Microsoft SQL-Server flavour)
 
+------
+
+## Language elements
+[https://docs.microsoft.com/en-us/sql/t-sql/language-elements/language-elements-transact-sql?view=sql-server-2017](https://docs.microsoft.com/en-us/sql/t-sql/language-elements/language-elements-transact-sql?view=sql-server-2017)
+`coalesce(a,b)` take first not NULL  
+`nullif(a,b)`  if equal, returns NULL  
+`UNION, UNION ALL, EXCEPT, INTERSECT`
+`substring, len`
+Variables:
+
+```sql
+DECLARE @MyVariable int;
+SET @MyVariable = 1;
+```
+
+## SELECTING
+
+### Random rows
+
+```sql
+select top 5 ename,job from emp order by newid( )
+```
+
+
+
+## CREATING
 
 ### Create table
 
@@ -55,7 +81,7 @@ when not matched then
   values (emp.empno,emp.ename,emp.deptno,emp.comm)
 ```
 
-### Delete
+## DELETING
 
 All rows
 
@@ -72,6 +98,28 @@ Table
 drop table if exists TableName
 ```
 
+## METADATA
+
+Query table names:
+```sql
+select table_name from information_schema.tables where table_schema = 'SMEAGOL'
+```
+
+Query column names
+````sql
+select column_name, data_type, ordinal_position from information_schema.columns where table_schema = 'SMEAGOL' and table_name = 'EMP'
+```
+
+## CONCEPTS
+
+NULL: NULL is never equal to or not equal to any value, not even itself. If you want to evaluate values returned by a nullable column like you would evaluate real values, use coalesce(var, 0)
+
+CTE - common table expressions
+
+Correlated subquery
+
+
 
 ### References
  * SQL Cookbook, by Anthony Molinaro. 2006 O’Reilly
+ * The Art of SQL. By Stephane Faroult, Peter Robson. O’Reilly
