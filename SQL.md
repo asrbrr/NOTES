@@ -4,33 +4,68 @@
 
 ------
 
-## Language elements
+## NOTES
+
+##### Language elements
 [https://docs.microsoft.com/en-us/sql/t-sql/language-elements/language-elements-transact-sql?view=sql-server-2017](https://docs.microsoft.com/en-us/sql/t-sql/language-elements/language-elements-transact-sql?view=sql-server-2017)
+
 `coalesce(a,b)` take first not NULL  
-`nullif(a,b)`  if equal, returns NULL  
+`nullif(a,b)`: if equal, returns NULL  
 `UNION, UNION ALL, EXCEPT, INTERSECT`
-`substring, len`
-Variables:
+`substring(x,2,5), len(x)
+`DATEADD(day, 1, x)`, `DATEDIFF(day, i, e)`
+
+NULL: NULL is never equal to or not equal to any value, not even itself. If you want to evaluate values returned by a nullable column like you would evaluate real values, use coalesce(var, 0). Aggregate functions ignore NULLs
+
+##### Variables  
 
 ```sql
 DECLARE @MyVariable int;
 SET @MyVariable = 1;
 ```
 
+
+
+
+##### CTE - common table expressions
+
+##### Correlated subquery
+
+##### Scalar subquery
+
+##### Recursive with  
+Allows looping (recursive query). Exmaple, generate sequence of 10 integers:
+```sql
+with x (id) as (
+	select 1  --anchor
+
+	union all
+
+	select id+1
+	from x
+	where id+1 <= 10
+	)
+select * from x
+--OPTION (MAXRECURSION 6)
+```
+
 ## SELECTING
 
-### Random rows
-
+Random rows
 ```sql
 select top 5 ename,job from emp order by newid( )
+```
+Sample table
+```sql
+SELECT *
+FROM (VALUES (1), (5), (10), (50), (100), (200), (300), (359)) AS x(angle)
 ```
 
 
 
 ## CREATING
 
-### Create table
-
+Create table
 ```sql
 create table D (id integer default 0)
 ```
@@ -39,14 +74,12 @@ Copying definition from antother table
 select *  into dept_2 from dept where 1 = 0
 ```
 
-### Insert rows
-
-Explicit values
+Insert rows (explicit values)
 ```sql
 insert into dept (deptno,dname,loc) values (50,'PROGRAMMING','BALTIMORE')
 ```
 
-From another table
+Insert rows (from another table)
 ```sql
 insert into dept_east (deptno,dname,loc)
 select deptno,dname,loc  from dept where loc in ( 'NEW YORK','BOSTON' )
@@ -54,7 +87,7 @@ select deptno,dname,loc  from dept where loc in ( 'NEW YORK','BOSTON' )
 Note: it is possible to insert values on views, that expose say a subset of cols.
 
 
-### Update rows
+## UPDATING
 
 ```sql
 update emp
@@ -110,16 +143,9 @@ Query column names
 select column_name, data_type, ordinal_position from information_schema.columns where table_schema = 'SMEAGOL' and table_name = 'EMP'
 ```
 
-## CONCEPTS
-
-NULL: NULL is never equal to or not equal to any value, not even itself. If you want to evaluate values returned by a nullable column like you would evaluate real values, use coalesce(var, 0)
-
-CTE - common table expressions
-
-Correlated subquery
 
 
 
-### References
+## References
  * SQL Cookbook, by Anthony Molinaro. 2006 O’Reilly
  * The Art of SQL. By Stephane Faroult, Peter Robson. O’Reilly
