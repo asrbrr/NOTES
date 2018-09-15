@@ -9,15 +9,19 @@
 ##### Language elements
 [https://docs.microsoft.com/en-us/sql/t-sql/language-elements/language-elements-transact-sql?view=sql-server-2017](https://docs.microsoft.com/en-us/sql/t-sql/language-elements/language-elements-transact-sql?view=sql-server-2017)
 
-`coalesce(a,b)` take first not NULL  
-`nullif(a,b)`: if equal, returns NULL  
+
+
 `UNION, UNION ALL, EXCEPT, INTERSECT`
-`substring(x,2,5), len(x)
-`DATEADD(day, 1, x)`, `DATEDIFF(day, i, e)`
 
-NULL: NULL is never equal to or not equal to any value, not even itself. If you want to evaluate values returned by a nullable column like you would evaluate real values, use coalesce(var, 0). Aggregate functions ignore NULLs
+Strings: `substring(x,2,5)`, `len(x)`
 
-##### Variables  
+Dates: `DATEADD(day, 1, getdate( ))`, `DATEDIFF(day, i, e)`, `DATEPART( hour, getdate())`, `datename(dw,x) -- 'Friday'`
+
+`NULL`: NULL is never equal to or not equal to any value, not even itself. If you want to evaluate values returned by a nullable column like you would evaluate real values, use coalesce(var, 0). Aggregate functions ignore NULLs
+ * `coalesce(a,b)` take first not NULL  
+ * `nullif(a,b)`: if equal, returns NULL  
+
+**Variables**
 
 ```sql
 DECLARE @MyVariable int;
@@ -27,14 +31,13 @@ SET @MyVariable = 1;
 
 
 
-##### CTE - common table expressions
+**CTE - common table expressions**
 
-##### Correlated subquery
+**Correlated subquery**
 
-##### Scalar subquery
+**Scalar subquery**
 
-##### Recursive with  
-Allows looping (recursive query). Exmaple, generate sequence of 10 integers:
+**Recursive with**: allows looping (recursive query). Exmaple, generate sequence of 10 integers:
 ```sql
 with x (id) as (
 	select 1  --anchor
