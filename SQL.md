@@ -28,16 +28,14 @@ DECLARE @MyVariable int;
 SET @MyVariable = 1;
 ```
 
-
-
-
-**CTE - common table expressions**
-
-**Correlated subquery**
+**Correlated subquery**: a subquery making use of elements from the envelope query
 
 **Scalar subquery**
 
-**Recursive with**: allows looping (recursive query). Exmaple, generate sequence of 10 integers:
+**CTE - common table expressions**: specifies a temporary named result set: `WITH x as (...)`
+
+
+**Recursive WITH**: allows looping (recursive query). Exmaple, generate sequence of 10 integers:
 ```sql
 with x (id) as (
 	select 1  --anchor
@@ -51,6 +49,15 @@ with x (id) as (
 select * from x
 --OPTION (MAXRECURSION 6)
 ```
+
+
+**Options**
+
+`SET ANSI_NULLS ON` : always use ON. specifies that how SQL Server handles the comparison operations with NULL values.  
+
+`SET QUOTED_IDENTIFIER ON` : always ON. When it is set to ON any character set that is defined in the double quotes “”is treated as a T-SQL Identifier (Table Name, Proc Name, Column Name….etc) When any character set that is defined in the single quotes ‘’ is treated as a literal. When it is set to OFF any character set that is defined either in Single Quotes or in Double Quotes is treated as a literal.  
+
+
 
 ## SELECTING
 
@@ -142,7 +149,7 @@ select table_name from information_schema.tables where table_schema = 'SMEAGOL'
 ```
 
 Query column names
-````sql
+```sql
 select column_name, data_type, ordinal_position from information_schema.columns where table_schema = 'SMEAGOL' and table_name = 'EMP'
 ```
 
