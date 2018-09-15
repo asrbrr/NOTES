@@ -20,6 +20,7 @@ Dates: `DATEADD(day, 1, getdate( ))`, `DATEDIFF(day, i, e)`, `DATEPART( hour, ge
 `NULL`: NULL is never equal to or not equal to any value, not even itself. If you want to evaluate values returned by a nullable column like you would evaluate real values, use coalesce(var, 0). Aggregate functions ignore NULLs
  * `coalesce(a,b)` take first not NULL  
  * `nullif(a,b)`: if equal, returns NULL  
+ * `isnull(a,0)`: replace NULLs in a by 0
 
 **Variables**
 
