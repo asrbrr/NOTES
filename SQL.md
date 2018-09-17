@@ -29,14 +29,15 @@ DECLARE @MyVariable int;
 SET @MyVariable = 1;
 ```
 
-**Correlated subquery**: a subquery making use of elements from the envelope query
+**Queries**
+Correlated subquery: a subquery making use of elements from the envelope query
 
-**Scalar subquery**
+Scalar subquery
 
-**CTE - common table expressions**: specifies a temporary named result set: `WITH x as (...)`
+CTE - common table expressions: specifies a temporary named result set: `WITH x as (...)`
 
 
-**Recursive WITH**: allows looping (recursive query). Exmaple, generate sequence of 10 integers:
+Recursive WITH: allows looping (recursive query). Exmaple, generate sequence of 10 integers:
 ```sql
 with x (id) as (
 	select 1  --anchor
@@ -50,6 +51,18 @@ with x (id) as (
 select * from x
 --OPTION (MAXRECURSION 6)
 ```
+
+**Indexes / searches**
+
+**Table scan**
+
+A table scan occurs when the storage engine is forced to walk through the table, row by row, either returning everything, as in our case, because we’re not using a WHERE clause and we’re not hitting a covering index (an index that includes all the columns referred to in the query for a given table), or searching everything to identify the appropriate rows to return to the user. 
+
+https://www.red-gate.com/simple-talk/sql/performance/execution-plan-basics/
+
+
+
+
 
 
 **Options**
