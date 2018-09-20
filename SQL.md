@@ -34,7 +34,7 @@ Correlated subquery: a subquery making use of elements from the envelope query
 
 Scalar subquery
 
-CTE - common table expressions: specifies a temporary named result set: `WITH x as (...)`
+CTE - common table expressions: can be thought of as a temporary result set that is defined within the execution scope of a single SELECT, INSERT, UPDATE, DELETE, or CREATE VIEW statement. Also allows for making it into a recursive query: `WITH x as (...)`
 
 
 Recursive WITH: allows looping (recursive query). Exmaple, generate sequence of 10 integers:
@@ -49,7 +49,7 @@ with x (id) as (
 	where id+1 <= 10
 	)
 select * from x
---OPTION (MAXRECURSION 6)
+--OPTION (MAXRECURSION 0)
 ```
 
 **Indexes / searches**
