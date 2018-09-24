@@ -143,6 +143,10 @@ when not matched then
 All rows
 
 ```sql
+TRUNCATE TABLE #tmp
+```
+
+```sql
 delete from emp
 ```
 Some rows
@@ -153,6 +157,11 @@ delete from emp where deptno = 10
 Table
 ```sql
 drop table if exists TableName
+```
+
+column
+```sql
+ALTER TABLE #tmp DROP COLUMN  [col_name]
 ```
 
 ## METADATA
