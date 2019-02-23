@@ -1,8 +1,12 @@
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-$$
+Paragraph:  
+$$  
 \frac{\pi}{2} * \alpha
-$$
+$$  
+
+And inline: $\pi$
+
 
 # SQL cheatsheet and recipies
 
