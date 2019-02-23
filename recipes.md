@@ -11,4 +11,4 @@ add this to the .md file (references: [http://songhuiming.github.io/pages/2017/0
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 ```
 
-Test: $$\Sum_i \sqrt{\pi x_i}$$
+Test: $$\sum_i sin(2 \pi \omega_i t)   $$
