@@ -5,7 +5,7 @@ $$
 \frac{\pi}{2} * \alpha
 $$  
 
-And inline: $\pi$
+And inline: $$\pi^2$$
 
 
 # SQL cheatsheet and recipies
